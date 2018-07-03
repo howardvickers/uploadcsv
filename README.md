@@ -12,7 +12,6 @@ The web app offers the following functionality:
 * view initial rows (equivalent to df.head() in pandas)
 * match columns with predefined field names
 * view same initial rows for only those columns matched to the predefined field names
-* select columns using jquery (without page refresh)
 * download the data in the new format as a csv file
 * demo mode with preloaded csv file
 

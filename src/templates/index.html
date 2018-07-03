@@ -7,7 +7,7 @@
    <meta name="description" content="">
    <meta name="author" content="">
    <!-- Page title -->
-   <title>No-Code ML: no-code-ml.com</title>
+   <title>UploadCSV: uploadcsv.com</title>
    <!-- Latest compiled and minified CSS -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -137,19 +137,21 @@
                <div id="jumbo" class="jumbotron" style="overflow-x:scroll">
                   <h2>About </h2>
                   <div class="myText">
-                     This website is a personal project to demonstrate how a process to automate the uploading of  made more accessible to non-data scientists.
+                    This is a personal project to create a web app that allows someone to upload different csv files with registration details (eg name, contact details etc) and import into a fixed format database.
                      </br>
                      </br>
-                     For example, imagine sales numbers not just being shared as tables and charts of historic data, but as an interactive tool, where different teams could explore a more predictive analysis.
-                     This could enable more in-depth discussions about the factors driving sales and how best to predict future performance (beyond just drawing a straight line on an excel chart!)</small></small>
+                     This could be useful for a company that receives lists of customers or members in different csv structures and needs to enter this data into their own database.
                      </br>
-                     </br>
-                     This site allows users to upload a csv file (see <i>Demo Only</i> section below) and use point-n-click skills to carry out data manipulation normally done in python code (especially Numpy and Pandas).</small></small>
+                     Note that the web app is intended as a conceptual project rather than a commercial product. It aims to showcase the programmer's skillset of data management and web dev.
+                   </br>
+                     The web app offers the following functionality:
                      <ul>
-                        <li>Select variables (columns) to analyze</li>
-                        <li>Identify the variables (columns) that offer the most predictive power</li>
-                        <li>Rename columns for more meaningful labels</li>
-                        <li>Run and compare several regression analyses (including Linear Regression, Random Forest, K Neighbors)</li>
+                        <li>upload csv files</li>
+                        <li>view initial rows (equivalent to df.head() in pandas)</li>
+                        <li>match columns with predefined field names</li>
+                        <li>view same initial rows for only those columns matched to the predefined field names</li>
+                        <li>download the data in the new format as a csv file</li>
+                        <li>demo mode with preloaded csv file</li>
                      </ul>
                   </div>
                </div>
