@@ -22,7 +22,7 @@ The web app offers the following functionality:
 ### Structure
 * [app.py](https://github.com/howardvickers/uploadcsv/blob/master/src/app.py) is the server.  
 * [index.html](https://github.com/howardvickers/uploadcsv/blob/master/src/templates/index.html) is the initial html page (includes upload and demo functions).  
-* [ml.html](https://github.com/howardvickers/uploadcsv/blob/master/src/templates/upload.html) is the field matching and download html page (main interface).  
+* [upload.html](https://github.com/howardvickers/uploadcsv/blob/master/src/templates/upload.html) is the field matching and download html page (main interface).  
 
 ### Technologies Employed
 * python
