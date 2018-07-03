@@ -1,0 +1,207 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+<head>
+   <!-- meta tags not used in this project -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- Page title -->
+   <title>No-Code ML: no-code-ml.com</title>
+   <!-- Latest compiled and minified CSS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <!-- favicon is in static folder; href points to a "variable" defined by curly braces. -->
+   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+   <!-- Custom styles in main.css -->
+   <!-- main.css is in static folder; href points to a "variable" defined by curly braces. -->
+   <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/popper.min.js') }}" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+   <link href="{{ url_for('static', filename='css/jquery-3.3.1.min.js') }}" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+   <script>
+      $(document).ready(function() {
+       $('[data-rel=popover]').popover({
+         html: true,
+         trigger: "hover"
+       });
+      })
+         $(function() {
+           $('#upload_file_btn').click(function(e) {
+               console.log("yay upload web!")
+               var form_data = new FormData($('#upload_file')[0]);
+               console.log('this is form_data', form_data);
+               e.preventDefault();
+               $.ajax({
+                   type: 'POST',
+                   url: '/upload',
+                   data: form_data,
+                   contentType: false,
+                   cache: false,
+                   processData: false,
+                   async: false,
+                   success: function(data) {
+                       console.log('Success!');
+                   },
+               });
+           });
+         });
+
+         $(document).ready(function(){
+             $("#downloadcsv_btn").click(function(e){
+                 e.preventDefault();
+                 $.ajax({
+                   type : 'GET',
+                   url : '/downloadcsv',
+                   success: function(){
+                     console.log('downloadcsv clicked!');
+                 }
+               })
+             });
+         });
+
+         $(document).ready(function(){
+           var oForm4 = document.forms["form4"];
+             $("#button4").click(function(e){
+                 e.preventDefault();
+                 var newcolsData = $(oForm4).serializeArray();
+                 $.ajax({
+                   data: newcolsData,
+                   type : 'POST',
+                   url : '/match_cols',
+                   success: function(data){
+                     $("#newcols").html(data.columns);
+                     $("#html_select").html(data.html_select);
+                     $("#newhead").html(data.newhead);
+                     $("#newcolshead").html(data.newcolhead);
+                 }
+               })
+             });
+         });
+
+         $(document).ready(function(){
+           var oForm2 = document.forms["form2"];
+             $("#button2").click(function(e){
+               console.log("yay regressions!")
+               e.preventDefault();
+                 var models = $(oForm2).serializeArray();
+                 $.ajax({
+                   data: models,
+                   type : 'POST',
+                   url : '/regressions',
+                   success: function(data){
+                     console.log('the data:',  data)
+                     $("#regression_results").html(data);
+                 }
+               })
+             });
+         });
+
+      $(function () {
+         $('[data-toggle="popover"]').popover()
+         })
+   </script>
+</head>
+{% endblock %}
+{% block content %}
+<div class="container">
+</br>
+<div class="page-header">
+   <div class="container">
+     <div class=""><a href="/" style="text-decoration:none">
+        <div id="jumbo_top" class="jumbotron " style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+           <h1>Upload CSV</h1>
+           <h3>Importing Membership Data from a CSV File</h3>
+        </div></a>
+     </div>
+      <div class="">
+         <div id="jumbo_top" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h3>Summary of CSV File <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Summary of CSV Data" data-content="The below summary of the csv file shows the first few rows for all of the columns."><i>i</i></button></h3>
+            <div class="table table-hover">
+               <div id="">
+                  {{firsthead}}
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="">
+         <div class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h3>Match Columns <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Matching Columns & Fields" data-content="Match the columns from the data you wish to import with the field names in the permanent database."><i>i</i></button>
+            </h3>
+            <h3><small>Match Columns with Database Fields</small></h3>
+            <form name="form4" action="/match_cols">
+               <table class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th scope="col">Column</th>
+                        <!-- <th scope="col">Data Type</th> -->
+                        <th scope="col">Match Field</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                    {% for col, typ in cols_types.items() %}
+                    <tr>
+                       <td>{{col}}</td>
+                       <!-- <td>{{typ[0]}}</td> -->
+                       <td>
+
+                       <select id="matchFields" type="button" name="{{col}}" class="btn btn-outline-secondary">
+                         <option value="ignore">Match Field</option>
+                         <option value="db_first">First Name</option>
+                         <option value="db_last">Last Name</option>
+                         <option value="db_state">State</option>
+                         <option value="db_email">Email</option>
+                         <option value="ignore">Do Not Import</option>
+                       </select>
+                     </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+               </table>
+               <button id="button4" type="submit" class="btn btn-primary" >Submit Matched Fields</button>
+            </form>
+         </div>
+      </div>
+      <div class="">
+         <div class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h3>Table Summary with Matched Fields  <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Data Ready for Import" data-content="Below is a summary table of the initial data that is now ready for import."><i>i</i></button></h3>
+            <div class="table table-hover">
+               <div id="newcolshead">
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="">
+         <div id="jumbo_download" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h2>Download <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Download CSV" data-content="Click on the Download button to download the CSV file ready to import into the permanent database."><i>i</i></button></h2>
+            <form id="downloadcsv" name="form_download" enctype="multipart/form-data" method="get" action="/downloadcsv">
+               <div class="col">
+                  <a href="/downloadcsv/"><button id="btn_download"  type="submit" class="btn btn-lg btn-primary"  >Download</button></a>
+               </div>
+            </form>
+         </div>
+      </div>
+
+
+   </div>
+</div>
+<footer class="footer">
+   <div class="container" align="center">
+      <a href="https://github.com/howardvickers/uploadcsv" class="btn btn-social-icon btn-github btn-small"><i class="fa fa-github fa-3x"></i></a>
+      <a href="https://linkedin.com/in/howardvickers/" class="btn btn-social-icon btn-linkedin btn-small"><i class="fa fa-linkedin fa-3x"></i></a>
+      </p>
+   </div>
+</footer>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+{% endblock %}
