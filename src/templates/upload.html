@@ -100,15 +100,15 @@
                   <thead>
                      <tr>
                         <th scope="col">Column</th>
-                        <!-- <th scope="col">Data Type</th> -->
+                        <th scope="col">Example</th>
                         <th scope="col">Match Field</th>
                      </tr>
                   </thead>
                   <tbody>
-                     {% for col, typ in cols_types.items() %}
+                     {% for col, example in cols_examples.items() %}
                      <tr>
                         <td>{{col}}</td>
-                        <!-- <td>{{typ[0]}}</td> -->
+                        <td>{{example}}</td>
                         <td>
                            <select id="matchFields" type="button" name="{{col}}" class="btn btn-outline-secondary">
                               <option value="ignore">Match Field</option>
