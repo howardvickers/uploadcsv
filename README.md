@@ -16,6 +16,7 @@ The web app offers the following functionality:
 * demo mode with preloaded csv file
 
 ### Future Functionality
+* prevent duplicates when matching fields with columns
 * connect to a SQL database on the backend
 
 ### Structure
