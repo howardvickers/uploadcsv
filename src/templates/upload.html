@@ -42,27 +42,6 @@
            $('[data-toggle="popover"]').popover()
        })
 
-       $(function() {
-           $('#upload_file_btn').click(function(e) {
-               console.log("yay upload web!")
-               var form_data = new FormData($('#upload_file')[0]);
-               console.log('this is form_data', form_data);
-               e.preventDefault();
-               $.ajax({
-                   type: 'POST',
-                   url: '/upload',
-                   data: form_data,
-                   contentType: false,
-                   cache: false,
-                   processData: false,
-                   async: false,
-                   success: function(data) {
-                       console.log('Success!');
-                   },
-               });
-           });
-       });
-
        $("#downloadcsv_btn").click(function(e) {
            e.preventDefault();
            $.ajax({
@@ -74,12 +53,12 @@
            })
        });
 
-       var oForm4 = document.forms["form4"];
-       $("#button4").click(function(e) {
+       var MatchForm = document.forms["match_form"];
+       $("#match_btn").click(function(e) {
            e.preventDefault();
-           var newcolsData = $(oForm4).serializeArray();
+           var matchFormData = $(MatchForm).serializeArray();
            $.ajax({
-               data: newcolsData,
+               data: matchFormData,
                type: 'POST',
                url: '/match_cols',
                success: function(data) {
@@ -122,7 +101,7 @@
             <h3>Match Columns <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Matching Columns & Fields" data-content="Match the columns from the data you wish to import with the field names in the permanent database."><i>i</i></button>
             </h3>
             <h3><small>Match Columns with Database Fields</small></h3>
-            <form name="form4" action="/match_cols">
+            <form name="match_form" action="/match_cols">
                <table class="table table-hover">
                   <thead>
                      <tr>
@@ -151,7 +130,7 @@
                     {% endfor %}
                   </tbody>
                </table>
-               <button id="button4" type="submit" class="btn btn-primary" >Submit Matched Fields</button>
+               <button id="match_btn" type="submit" class="btn btn-primary" >Submit Matched Fields</button>
             </form>
          </div>
       </div>
