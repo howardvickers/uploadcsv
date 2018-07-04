@@ -41,7 +41,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return flask.render_template('index.html')
- 
+
 @app.route('/uploadcsv', methods=["POST"])
 def uploadcsv():
     print('type (request)', type (request.files['data_file']))
@@ -95,7 +95,6 @@ def match_cols():
         field_match_dict = {}
         print('input from form (match cols): ', request.form)
         for k, v in form_results.items():
-            print('This is k : v', k, ':', v)
             if v in db_fields:
                 field_match_dict[k] = v
                 cols_to_keep.append(k)
@@ -103,11 +102,8 @@ def match_cols():
         cols_to_drop = set(all_cols) - set(cols_to_keep)
         print('cols_to_drop:', cols_to_drop)
         df_reduced_cols = df.drop(cols_to_drop, axis=1)
-        print('Here is df_reduced_cols', df_reduced_cols)
-        print('df_reduced_cols.columns', df_reduced_cols.columns)
         for old, new in field_match_dict.items():
             df_reduced_cols.rename(columns={old: new}, inplace=True)
-
         head_new_csv = print_head(df_reduced_cols)
         df_reduced_cols.to_csv('../data/ready_to_import.csv')
         print('head_new_csv: ', head_new_csv)
