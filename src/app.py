@@ -14,27 +14,6 @@ def print_head(df):
     head = df.head().to_html()
     return Markup(head)
 
-# def rename_col_types(df):
-#     cols_types = df.dtypes.to_dict()
-#     for k, v in cols_types.items():
-#         if v == 'int64':
-#             cols_types[k] = ['Numeric', '', '', '']
-#         elif v == 'float64':
-#             cols_types[k] = ['Numeric', '', '', '']
-#         else:
-#             cols_types[k] = ['Text', '', '', '']
-#     return cols_types
-
-# def append_cols_types(cols_types, coefs_dict, pvals_dict):
-#     for k, v in cols_types.items():
-#         for key, value in coefs_dict.items():
-#             if k == key:
-#                 cols_types[k][2] = value
-#         for key, value in pvals_dict.items():
-#             if k == key:
-#                 cols_types[k][3] = value
-#                 cols_types[k] = v
-    return cols_types
 
 app = Flask(__name__)
 
@@ -53,20 +32,13 @@ def uploadcsv():
     df.to_csv('../data/df.csv', index=False)
     initial_head = print_head(df)
     columns = list(df.columns)
-    # cols_examples = {}
     row_one = df.iloc[0]
     cols_examples = dict(zip(columns, row_one))
     print('cols_examples:', cols_examples)
-    # cols_types = rename_col_types(df)
-    # coefs_dict = {}
-    # pvals_dict = {}
-    # append_cols_types(cols_types, coefs_dict, pvals_dict)
-    # print('cols_types:', cols_types)
     return flask.render_template(
                                 'upload.html',
                                 firsthead = initial_head,
                                 cols_examples = cols_examples
-                                # columns = columns
                                 )
 
 @app.route('/demo', methods=["GET"])
@@ -83,8 +55,6 @@ def demo():
     cols_examples = dict(zip(columns, row_one))
     print('cols_examples:', cols_examples)
     print('columns: ', columns)
-    # print('type(columns): ', type(columns))
-    # cols_types = rename_col_types(df)
     return flask.render_template(
                                 'upload.html',
                                 firsthead = initial_head,
@@ -100,7 +70,6 @@ def match_cols():
         cols_to_keep = []
         all_cols = list(df.columns)
         field_match_dict = {}
-        # head1 = print_head(df)
         form_results = request.form
         print('input from form (match cols): ', form_results)
         for k, v in form_results.items():
