@@ -59,7 +59,6 @@ def demo():
                                 'upload.html',
                                 firsthead = initial_head,
                                 cols_examples = cols_examples
-                                # columns = columns
                                 )
 
 @app.route('/match_cols', methods=["POST", "GET"])
