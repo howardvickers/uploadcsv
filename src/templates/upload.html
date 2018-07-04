@@ -34,10 +34,7 @@
                alert('This field has already been selected - please select another')
            }
        });
-       // $('[data-rel=popover]').popover({
-       //     html: true,
-       //     trigger: "hover"
-       // });
+
        $(function() {
            $('[data-toggle="popover"]').popover()
        })
@@ -66,8 +63,6 @@
                }
            })
        });
-
-
    })
  </script>
 </head>
@@ -77,12 +72,14 @@
 </br>
 <div class="page-header">
    <div class="container">
-     <div class=""><a href="/" style="text-decoration:none">
-        <div id="jumbo_top" class="jumbotron " style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
-           <h1>Upload CSV</h1>
-           <h3>Importing Membership Data from a CSV File</h3>
-        </div></a>
-     </div>
+      <div class="">
+         <a href="/" style="text-decoration:none">
+            <div id="jumbo_top" class="jumbotron " style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+               <h1>Upload CSV</h1>
+               <h3>Importing Membership Data from a CSV File</h3>
+            </div>
+         </a>
+      </div>
       <div class="">
          <div id="jumbo_top" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
             <h3>Summary of CSV File <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Summary of CSV Data" data-content="The below summary of the csv file shows the first few rows for all of the columns."><i>i</i></button></h3>
@@ -108,23 +105,22 @@
                      </tr>
                   </thead>
                   <tbody>
-                    {% for col, typ in cols_types.items() %}
-                    <tr>
-                       <td>{{col}}</td>
-                       <!-- <td>{{typ[0]}}</td> -->
-                       <td>
-
-                       <select id="matchFields" type="button" name="{{col}}" class="btn btn-outline-secondary">
-                         <option value="ignore">Match Field</option>
-                         <option value="db_first">First Name</option>
-                         <option value="db_last">Last Name</option>
-                         <option value="db_state">State</option>
-                         <option value="db_email">Email</option>
-                         <option value="ignore">Do Not Import</option>
-                       </select>
-                     </td>
-                    </tr>
-                    {% endfor %}
+                     {% for col, typ in cols_types.items() %}
+                     <tr>
+                        <td>{{col}}</td>
+                        <!-- <td>{{typ[0]}}</td> -->
+                        <td>
+                           <select id="matchFields" type="button" name="{{col}}" class="btn btn-outline-secondary">
+                              <option value="ignore">Match Field</option>
+                              <option value="db_first">First Name</option>
+                              <option value="db_last">Last Name</option>
+                              <option value="db_state">State</option>
+                              <option value="db_email">Email</option>
+                              <option value="ignore">Do Not Import</option>
+                           </select>
+                        </td>
+                     </tr>
+                     {% endfor %}
                   </tbody>
                </table>
                <button id="match_btn" type="submit" class="btn btn-primary" >Submit Matched Fields</button>
@@ -140,7 +136,6 @@
             </div>
          </div>
       </div>
-
       <div class="">
          <div id="jumbo_download" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
             <h2>Download <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Download CSV" data-content="Click on the Download button to download the CSV file ready to import into the permanent database."><i>i</i></button></h2>
@@ -151,8 +146,6 @@
             </form>
          </div>
       </div>
-
-
    </div>
 </div>
 <footer class="footer">
