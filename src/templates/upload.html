@@ -28,7 +28,12 @@
    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
    <script>
-      $(document).ready(function() {
+   $(document).ready(function() {
+     $('select').change(function () {
+       if ($('select option[value="' + $(this).val() + '"]:selected').length > 1){
+         alert('This field has already been selected - please select another')
+       }
+     });
        $('[data-rel=popover]').popover({
          html: true,
          trigger: "hover"
