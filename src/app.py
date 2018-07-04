@@ -71,6 +71,8 @@ def match_cols():
         field_match_dict = {}
         form_results = request.form
         print('input from form (match cols): ', form_results)
+        print('form_results.orguserid:', form_results['orguserid'])
+        orgUserId = form_results['orguserid']
         for k, v in form_results.items():
             if v in db_fields:
                 field_match_dict[k] = v
@@ -81,6 +83,7 @@ def match_cols():
         df_reduced_cols = df.drop(cols_to_drop, axis=1)
         for old, new in field_match_dict.items():
             df_reduced_cols.rename(columns={old: new}, inplace=True)
+        df_reduced_cols.insert(0, 'db_userid', [orgUserId+str(i) for i in range(0, len(df_reduced_cols))])
         head_new_csv = print_head(df_reduced_cols)
         df_reduced_cols.to_csv('../data/ready_to_import.csv')
         print('head_new_csv: ', head_new_csv)
