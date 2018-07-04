@@ -71,7 +71,6 @@ def match_cols():
         field_match_dict = {}
         form_results = request.form
         print('input from form (match cols): ', form_results)
-        print('form_results.orguserid:', form_results['orguserid'])
         orgUserId = form_results['orguserid']
         for k, v in form_results.items():
             if v in db_fields:
