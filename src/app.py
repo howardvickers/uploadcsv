@@ -16,13 +16,6 @@ def print_head(df):
 
 app = Flask(__name__)
 
-@app.route('/downloadcsv')
-def downloadcsv():
-    return send_file('../data/ready_to_import.csv',
-                     mimetype='text/csv',
-                     attachment_filename='ready_to_import.csv',
-                     as_attachment=True)
-
 @app.route('/')
 def index():
     return flask.render_template('index.html')
@@ -119,12 +112,12 @@ def match_cols():
         for old, new in field_match_dict.items():
             df_reduced_cols.rename(columns={old: new}, inplace=True)
 
-        head_red = print_head(df_reduced_cols)
+        head_new_csv = print_head(df_reduced_cols)
         df_reduced_cols.to_csv('../data/ready_to_import.csv')
-        print('head_red: ', head_red)
+        print('head_new_csv: ', head_new_csv)
         return flask.jsonify(
                                 firsthead1 = head1,
-                                newcolhead = head_red
+                                matching_tbl = head_new_csv
                                 )
 
     elif request.method=='GET':
@@ -132,6 +125,12 @@ def match_cols():
     else:
         return("ok")
 
+@app.route('/downloadcsv')
+def downloadcsv():
+    return send_file('../data/ready_to_import.csv',
+                     mimetype='text/csv',
+                     attachment_filename='ready_to_import.csv',
+                     as_attachment=True)
 
 
 if __name__ == "__main__":

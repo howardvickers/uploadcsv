@@ -62,10 +62,7 @@
                type: 'POST',
                url: '/match_cols',
                success: function(data) {
-                   // $("#newcols").html(data.columns);
-                   // $("#html_select").html(data.html_select);
-                   // $("#newhead").html(data.newhead);
-                   $("#newcolshead").html(data.newcolhead);
+                   $("#match_tbl").html(data.matching_tbl);
                }
            })
        });
@@ -138,7 +135,7 @@
          <div class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
             <h3>Table Summary with Matched Fields  <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Data Ready for Import" data-content="Below is a summary table of the initial data that is now ready for import."><i>i</i></button></h3>
             <div class="table table-hover">
-               <div id="newcolshead">
+               <div id="match_tbl">
                </div>
             </div>
          </div>
