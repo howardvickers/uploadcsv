@@ -14,16 +14,6 @@ def print_head(df):
     head = df.head().to_html()
     return Markup(head)
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return flask.render_template('index.html')
-
-@app.route('/ml')
-def ml():
-    return flask.render_template('upload.html')
-
 def rename_col_types(df):
     cols_types = df.dtypes.to_dict()
     for k, v in cols_types.items():
@@ -46,6 +36,12 @@ def append_cols_types(cols_types, coefs_dict, pvals_dict):
                 cols_types[k] = v
     return cols_types
 
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return flask.render_template('index.html')
+ 
 @app.route('/uploadcsv', methods=["POST"])
 def uploadcsv():
     print('type (request)', type (request.files['data_file']))
