@@ -29,20 +29,20 @@
    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
    <script>
    $(document).ready(function() {
-     $('select').change(function () {
-       if ($('select option[value="' + $(this).val() + '"]:selected').length > 1){
-         alert('This field has already been selected - please select another')
-       }
-     });
-       $('[data-rel=popover]').popover({
-         html: true,
-         trigger: "hover"
+       $('select').change(function() {
+           if ($('select option[value="' + $(this).val() + '"]:selected').length > 1) {
+               alert('This field has already been selected - please select another')
+           }
        });
-       $(function () {
-          $('[data-toggle="popover"]').popover()
-          })
+       $('[data-rel=popover]').popover({
+           html: true,
+           trigger: "hover"
+       });
+       $(function() {
+           $('[data-toggle="popover"]').popover()
+       })
 
-         $(function() {
+       $(function() {
            $('#upload_file_btn').click(function(e) {
                console.log("yay upload web!")
                var form_data = new FormData($('#upload_file')[0]);
@@ -61,61 +61,39 @@
                    },
                });
            });
-         });
+       });
 
-         // $(document).ready(function(){
-             $("#downloadcsv_btn").click(function(e){
-                 e.preventDefault();
-                 $.ajax({
-                   type : 'GET',
-                   url : '/downloadcsv',
-                   success: function(){
-                     console.log('downloadcsv clicked!');
-                 }
-               })
-             });
-         // });
+       $("#downloadcsv_btn").click(function(e) {
+           e.preventDefault();
+           $.ajax({
+               type: 'GET',
+               url: '/downloadcsv',
+               success: function() {
+                   console.log('downloadcsv clicked!');
+               }
+           })
+       });
 
-         // $(document).ready(function(){
-           var oForm4 = document.forms["form4"];
-             $("#button4").click(function(e){
-                 e.preventDefault();
-                 var newcolsData = $(oForm4).serializeArray();
-                 $.ajax({
-                   data: newcolsData,
-                   type : 'POST',
-                   url : '/match_cols',
-                   success: function(data){
-                     $("#newcols").html(data.columns);
-                     $("#html_select").html(data.html_select);
-                     $("#newhead").html(data.newhead);
-                     $("#newcolshead").html(data.newcolhead);
-                 }
-               })
-             });
-         // });
+       var oForm4 = document.forms["form4"];
+       $("#button4").click(function(e) {
+           e.preventDefault();
+           var newcolsData = $(oForm4).serializeArray();
+           $.ajax({
+               data: newcolsData,
+               type: 'POST',
+               url: '/match_cols',
+               success: function(data) {
+                   $("#newcols").html(data.columns);
+                   $("#html_select").html(data.html_select);
+                   $("#newhead").html(data.newhead);
+                   $("#newcolshead").html(data.newcolhead);
+               }
+           })
+       });
 
-         // $(document).ready(function(){
-         //   var oForm2 = document.forms["form2"];
-         //     $("#button2").click(function(e){
-         //       console.log("yay regressions!")
-         //       e.preventDefault();
-         //         var models = $(oForm2).serializeArray();
-         //         $.ajax({
-         //           data: models,
-         //           type : 'POST',
-         //           url : '/regressions',
-         //           success: function(data){
-         //             console.log('the data:',  data)
-         //             $("#regression_results").html(data);
-         //         }
-         //       })
-         //     });
-         // });
 
-       })
-
-   </script>
+   })
+ </script>
 </head>
 {% endblock %}
 {% block content %}
