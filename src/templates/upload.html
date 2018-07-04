@@ -38,7 +38,10 @@
          html: true,
          trigger: "hover"
        });
-      })
+       $(function () {
+          $('[data-toggle="popover"]').popover()
+          })
+
          $(function() {
            $('#upload_file_btn').click(function(e) {
                console.log("yay upload web!")
@@ -60,7 +63,7 @@
            });
          });
 
-         $(document).ready(function(){
+         // $(document).ready(function(){
              $("#downloadcsv_btn").click(function(e){
                  e.preventDefault();
                  $.ajax({
@@ -71,9 +74,9 @@
                  }
                })
              });
-         });
+         // });
 
-         $(document).ready(function(){
+         // $(document).ready(function(){
            var oForm4 = document.forms["form4"];
              $("#button4").click(function(e){
                  e.preventDefault();
@@ -90,29 +93,28 @@
                  }
                })
              });
-         });
+         // });
 
-         $(document).ready(function(){
-           var oForm2 = document.forms["form2"];
-             $("#button2").click(function(e){
-               console.log("yay regressions!")
-               e.preventDefault();
-                 var models = $(oForm2).serializeArray();
-                 $.ajax({
-                   data: models,
-                   type : 'POST',
-                   url : '/regressions',
-                   success: function(data){
-                     console.log('the data:',  data)
-                     $("#regression_results").html(data);
-                 }
-               })
-             });
-         });
+         // $(document).ready(function(){
+         //   var oForm2 = document.forms["form2"];
+         //     $("#button2").click(function(e){
+         //       console.log("yay regressions!")
+         //       e.preventDefault();
+         //         var models = $(oForm2).serializeArray();
+         //         $.ajax({
+         //           data: models,
+         //           type : 'POST',
+         //           url : '/regressions',
+         //           success: function(data){
+         //             console.log('the data:',  data)
+         //             $("#regression_results").html(data);
+         //         }
+         //       })
+         //     });
+         // });
 
-      $(function () {
-         $('[data-toggle="popover"]').popover()
-         })
+       })
+
    </script>
 </head>
 {% endblock %}
