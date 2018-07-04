@@ -28,38 +28,42 @@
    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
    <script>
       $(document).ready(function(){
-        var oForm3 = document.forms["form3"];
-          $("#button3").click(function(e){
-              e.preventDefault();
-              var dataResults = $(oForm3).serializeArray();
-              $.ajax({
-                data: dataResults,
-                type : 'POST',
-                url : '/change_col_names',
-                success: function(data){
-                  $("#result").html(data.result);
-              }
-            })
-          });
-      });
-      $(document).ready(function(){
-          $("#button").click(function(e){
-            console.log("click!")
-            e.preventDefault();
-              $.ajax({
-                data: new FormData($('#upload')[0]),
-                type : 'POST',
-                url : '/uploadcsv',
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function(d){
-                  $("#firsthead").html(d.head_table);
-                }
-            });
-          });
-      });
-      $(document).ready(function(){
+        $(function () {
+           $('[data-toggle="popover"]').popover()
+           })
+
+        // var oForm3 = document.forms["form3"];
+        //   $("#button3").click(function(e){
+        //       e.preventDefault();
+        //       var dataResults = $(oForm3).serializeArray();
+        //       $.ajax({
+        //         data: dataResults,
+        //         type : 'POST',
+        //         url : '/change_col_names',
+        //         success: function(data){
+        //           $("#result").html(data.result);
+        //       }
+        //     })
+        //   });
+      // });
+      // $(document).ready(function(){
+      //     $("#button").click(function(e){
+      //       console.log("click!")
+      //       e.preventDefault();
+      //         $.ajax({
+      //           data: new FormData($('#upload')[0]),
+      //           type : 'POST',
+      //           url : '/uploadcsv',
+      //           cache: false,
+      //           processData: false,
+      //           contentType: false,
+      //           success: function(d){
+      //             $("#firsthead").html(d.head_table);
+      //           }
+      //       });
+      //     });
+      // });
+      // $(document).ready(function(){
           $("#demo_btn").click(function(e){
               e.preventDefault();
               $.ajax({
@@ -71,25 +75,22 @@
             })
           });
       });
-      $(document).ready(function(){
-        var oForm2 = document.forms["form2"];
-          $("#button2").click(function(e){
-              e.preventDefault();
-              var models = $(oForm2).serializeArray();
-              $.ajax({
-                data: models,
-                type : 'POST',
-                url : '/regressions',
-                success: function(data){
-                  console.log('the data:',  data)
-                  $("#theresults").html(data);
-              }
-            })
-          });
-      });
-      $(function () {
-         $('[data-toggle="popover"]').popover()
-         })
+      // $(document).ready(function(){
+      //   var oForm2 = document.forms["form2"];
+      //     $("#button2").click(function(e){
+      //         e.preventDefault();
+      //         var models = $(oForm2).serializeArray();
+      //         $.ajax({
+      //           data: models,
+      //           type : 'POST',
+      //           url : '/regressions',
+      //           success: function(data){
+      //             console.log('the data:',  data)
+      //             $("#theresults").html(data);
+      //         }
+      //       })
+      //     });
+      // });
    </script>
 </head>
 {% endblock %}

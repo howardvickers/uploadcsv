@@ -115,10 +115,7 @@ def match_cols():
         head_new_csv = print_head(df_reduced_cols)
         df_reduced_cols.to_csv('../data/ready_to_import.csv')
         print('head_new_csv: ', head_new_csv)
-        return flask.jsonify(
-                                firsthead1 = head1,
-                                matching_tbl = head_new_csv
-                                )
+        return flask.jsonify(matching_tbl = head_new_csv)
 
     elif request.method=='GET':
         return "This is a GET method"
