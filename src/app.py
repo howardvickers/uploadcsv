@@ -32,13 +32,40 @@ def query_from_db(k, v):
     response = table.scan(
     FilterExpression=Attr('db_state').eq('CA')
     )
-    items = response['Items']
-    for row in items:
-        rw.append(<tr>)
-        for k, v in row.items():
-            <td>v</td>
-    print('items:', items)
-    return items
+    response_dict_lst = response['Items']
+    # items = [('db_state', 'CA'), ('db_userid', 'a_18'), ('db_last', 'Inouye'), ('db_first', 'Veronika'), ('db_email', 'vinouye@aol.com')]
+    # [{'db_state': 'CA', 'db_userid': 'a_18', 'db_last': 'Inouye', 'db_first': 'Veronika', 'db_email': 'vinouye@aol.com'},
+
+    top = '<table class="table table-hover"> <thead> <tr>'
+    col = '<th scope="col">{}</th>'.format(k)
+    end_head = '</tr> </thead> <tbody>'
+    row_begin = '<tr>'
+    row = '<td>{}</td>'
+    row_end = '</tr>'
+    bottom =   '</tbody></table>'
+    cols = ""
+    middle = ""
+    for field, value in response_dict_lst[0].items():
+        cols += col.format(field)
+    for obj in response_dict_lst:
+        middle += row_begin
+        for k, v in obj.items():
+            middle += row.format(v)
+        middle += row_end
+
+    the_table = top+cols+end_head+middle+bottom
+    print('the_table:', the_table)
+    return the_table
+
+
+    # for row in items:
+    #     rw.append(<tr>)
+    #     for k, v in row.items():
+    #         <td>v</td>
+
+
+    # print('items:', items)
+    # return items
 
 
 
@@ -69,8 +96,8 @@ def find_users():
         print('v:', v)
 
     result_obj = query_from_db(query_key, query_value)
-    print('this is the result_obj[0].items(): ', result_obj[0].items())
-    return flask.jsonify(query_result = result_obj[0].items())
+    print('this is the result_obj: ', result_obj)
+    return flask.jsonify(query_result = result_obj)
 
 @app.route('/')
 def index():
