@@ -136,11 +136,14 @@ def match_cols():
         df_reduced_cols = df.drop(cols_to_drop, axis=1)
         for old, new in field_match_dict.items():
             df_reduced_cols.rename(columns={old: new}, inplace=True)
-        df_reduced_cols.insert(0, 'db_userid', [orgUserId+str(i) for i in range(0, len(df_reduced_cols))])
-        head_new_csv = print_head(df_reduced_cols)
-        df_reduced_cols.to_csv('../data/ready_to_import.csv')
-        print('head_new_csv: ', head_new_csv)
-        add_to_db(df_reduced_cols)
+        if set(db_fields) != set(df_reduced_cols.columns):
+            head_new_csv = Markup('<script type="text/javascript">alert ("Fields are not correctly matched - please try again")</script>')
+        else:
+            df_reduced_cols.insert(0, 'db_userid', [orgUserId+str(i) for i in range(0, len(df_reduced_cols))])
+            head_new_csv = print_head(df_reduced_cols)
+            df_reduced_cols.to_csv('../data/ready_to_import.csv')
+            print('head_new_csv: ', head_new_csv)
+            add_to_db(df_reduced_cols)
         return flask.jsonify(matching_tbl = head_new_csv)
 
     elif request.method=='GET':
