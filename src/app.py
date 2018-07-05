@@ -30,7 +30,7 @@ def add_to_db(df):
 
 def query_from_db(k, v):
     response = table.scan(
-    FilterExpression=Attr('db_state').eq('CA')
+    FilterExpression=Attr(k).eq(v)
     )
     response_dict_lst = response['Items']
     print('response_dict_lst:', response_dict_lst)
