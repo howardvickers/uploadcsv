@@ -16,9 +16,11 @@ The web app offers the following functionality:
 * view same initial rows for only those columns matched to the predefined field names
 * download the data in the new format as a csv file
 * demo mode with preloaded csv file
+* connect to a DynamoDB database on the backend
+* query the database with a predefined search
 
 ### Future Functionality
-* connect to a DynamoDB database on the backend
+* improve robustness with checks
 
 ### Structure
 * [app.py](https://github.com/howardvickers/uploadcsv/blob/master/src/app.py) is the server.  
