@@ -195,6 +195,29 @@
          <div class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
             <h3>Query Results  <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Query Results" data-content="Below is query result."><i>i</i></button></h3>
             <div class="">
+
+
+              <table class="table table-hover">
+                 <thead>
+                    <tr>
+                       <th scope="col">1</th>
+                       <th scope="col">2</th>
+                       <th scope="col">3</th>
+                       <th scope="col">4</th>
+                       <th scope="col">5</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    {% for row in query_result %}
+                    <tr>
+                    {% for k,v in row.items() %}
+                      <td>{{v}}</td>
+                  </tr>
+                  {% endfor %}
+                  {% endfor %}
+               </tbody>
+            </table>
+
               <div id="query_tbl">
                </div>
             </div>

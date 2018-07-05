@@ -33,20 +33,12 @@ def query_from_db(k, v):
     FilterExpression=Attr('db_state').eq('CA')
     )
     items = response['Items']
+    for row in items:
+        rw.append(<tr>)
+        for k, v in row.items():
+            <td>v</td>
     print('items:', items)
     return items
-
-    #
-    # response = table.get_item(
-    # # Key=query_term
-    # Key={
-    #     'db_first': 'Delmy'
-    # }
-    #
-    # )
-    # item = response['Item']
-    # print('this is the item', item)
-    # return item
 
 
 
@@ -77,8 +69,8 @@ def find_users():
         print('v:', v)
 
     result_obj = query_from_db(query_key, query_value)
-    print('this is the result_obj: ', result_obj)
-    return flask.jsonify(query_result = result_obj)
+    print('this is the result_obj[0].items(): ', result_obj[0].items())
+    return flask.jsonify(query_result = result_obj[0].items())
 
 @app.route('/')
 def index():
