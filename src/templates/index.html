@@ -58,6 +58,19 @@
                }
            })
        });
+
+        $("#dynamodb_btn").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: '/create_user',
+                success: function() {
+                    console.log('user created');
+                }
+            })
+        });
+
+
    });
  </script>
 </head>
@@ -89,7 +102,7 @@
                   </div>
                </div>
                <div class="col-sm-6">
-                  <div id="jumbo_upload" class="jumbotron" style="overflow-x:scroll; white-space: nowrap;">
+                  <div id="jumbo_demo" class="jumbotron" style="overflow-x:scroll; white-space: nowrap;">
                      <h2>Demo Mode <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Click Demo" data-content="Click on the Demo button to use the demonstration csv file or upload your own csv file using the Upload button."><i>i</i></button></h2>
                      <div>
                         <form action="/demo">
@@ -152,6 +165,22 @@
                      Click on the GitHub logo below to explore the code.
                   </div>
                </div>
+            </div>
+            <div class="">
+              <div class="col-sm-6">
+                 <div id="jumbo_dynamodb" class="jumbotron" style="overflow-x:scroll; white-space: nowrap;">
+                    <h2>Create User <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Create User" data-content="Click on the Create User button to use create a user."><i>i</i></button></h2>
+                    <div>
+                       <form action="/create_user">
+                          <div class="col">
+                             </br>
+                             <button type="submit" class="btn btn-lg btn-primary">Create User</button>
+                             {{age}}
+                          </div>
+                       </form>
+                    </div>
+                 </div>
+              </div>
             </div>
          </div>
       </div>

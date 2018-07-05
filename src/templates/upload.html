@@ -63,7 +63,22 @@
                }
            })
        });
-   })
+
+      var QueryForm = document.forms["query_form"];
+      $("#query_btn").click(function(e) {
+          e.preventDefault();
+          var queryFormData = $(QueryForm).serializeArray();
+          $.ajax({
+              data: queryFormData,
+              type: 'POST',
+              url: '/find_users',
+              success: function(data) {
+                  console.log('success - yay - query_result is here!', data.query_result);
+                  $("#query_tbl").html(data.query_result);
+              }
+          })
+      });
+    })
  </script>
 </head>
 {% endblock %}
@@ -155,6 +170,41 @@
             </form>
          </div>
       </div>
+      <div class="">
+         <div id="jumbo_query" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h2>Find Users (CA/CO) <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Find Users in Database" data-content="Find users just added to the database according to their state by selecting with the dropdown list."><i>i</i></button></h2>
+            <form id="querydb" name="query_form" enctype="multipart/form-data" method="get" action="/find_users">
+               <div class="col">
+                 <select id="query_state" type="button" name="db_state" class="btn btn-outline-secondary">
+                    <option value="">Select State</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                 </select>
+
+                 <button id="query_btn" type="submit" class="btn btn-primary" >Submit Query</button>
+
+                 <!-- Result from query: {{query_result}} -->
+               </div>
+            </form>
+
+         </div>
+      </div>
+
+
+      <div class="">
+         <div class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h3>Query Results  <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Query Results" data-content="Below is query result."><i>i</i></button></h3>
+            <div class="">
+              <div id="query_tbl">
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+
    </div>
 </div>
 <footer class="footer">

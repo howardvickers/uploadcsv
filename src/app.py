@@ -1,4 +1,5 @@
 from flask import Flask, make_response, request, render_template, jsonify
+from flask_dynamo import Dynamo
 from flask_bootstrap import Bootstrap
 from flask import Markup
 import flask
@@ -8,14 +9,76 @@ import pandas as pd
 import numpy as np
 import os
 from flask import send_file
+import boto3
+from boto3.dynamodb.conditions import Key, Attr
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('users')
+
 
 def print_head(df):
     """converts pandas 'head' to html; returns html"""
     head = df.head().to_html()
     return Markup(head)
 
+def add_to_db(df):
+    recs = df.to_dict('records')
+    for rec in recs:
+        table.put_item(Item = rec)
+    print('all items added to db')
+    return None
+
+def query_from_db(k, v):
+    response = table.scan(
+    FilterExpression=Attr('db_state').eq('CA')
+    )
+    items = response['Items']
+    print('items:', items)
+    return items
+
+    #
+    # response = table.get_item(
+    # # Key=query_term
+    # Key={
+    #     'db_first': 'Delmy'
+    # }
+    #
+    # )
+    # item = response['Item']
+    # print('this is the item', item)
+    # return item
+
+
 
 app = Flask(__name__)
+
+# @app.route('/create_user')
+# def create_user():
+#     print('create_user called')
+#     user="202"
+#     response = table.get_item(
+#     Key = {'userID':user}
+#     )
+#     age = response['Item']['Age']
+#     age_text = 'The age is {}'.format(age)
+#     table.put_item(Item={'userID':"303", 'Age':50, 'Height':180})
+#     return flask.render_template(
+#                                 'index.html',
+#                                 age = age
+#                                 )
+
+@app.route('/find_users', methods=["POST"])
+def find_users():
+    print('find_users called')
+    for k, v in request.form.items():
+        query_key = k
+        query_value = v
+        print('k:', k)
+        print('v:', v)
+
+    result_obj = query_from_db(query_key, query_value)
+    print('this is the result_obj: ', result_obj)
+    return flask.jsonify(query_result = result_obj)
 
 @app.route('/')
 def index():
@@ -86,6 +149,7 @@ def match_cols():
         head_new_csv = print_head(df_reduced_cols)
         df_reduced_cols.to_csv('../data/ready_to_import.csv')
         print('head_new_csv: ', head_new_csv)
+        add_to_db(df_reduced_cols)
         return flask.jsonify(matching_tbl = head_new_csv)
 
     elif request.method=='GET':
