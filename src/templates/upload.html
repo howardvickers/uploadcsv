@@ -146,7 +146,6 @@
                   <option value="d_">d</option>
                   <option value="e_">e</option>
                </select>
-
                <button id="match_btn" type="submit" class="btn btn-primary" >Submit Matched Fields</button>
             </form>
          </div>
@@ -161,16 +160,6 @@
          </div>
       </div>
       <div class="">
-         <div id="jumbo_download" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
-            <h2>Download <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Download CSV" data-content="Click on the Download button to download the CSV file ready to import into the permanent database."><i>i</i></button></h2>
-            <form id="downloadcsv" name="form_download" enctype="multipart/form-data" method="get" action="/downloadcsv">
-               <div class="col">
-                  <a href="/downloadcsv/"><button id="btn_download"  type="submit" class="btn btn-lg btn-primary"  >Download</button></a>
-               </div>
-            </form>
-         </div>
-      </div>
-      <div class="">
          <div id="jumbo_query" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
             <h2>Find Users (CA/CO) <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Find Users in Database" data-content="Find users just added to the database according to their state by selecting with the dropdown list."><i>i</i></button></h2>
             <form id="querydb" name="query_form" enctype="multipart/form-data" method="get" action="/find_users">
@@ -180,54 +169,30 @@
                     <option value="CA">CA</option>
                     <option value="NY">NY</option>
                  </select>
-
                  <button id="query_btn" type="submit" class="btn btn-primary" >Submit Query</button>
-
-                 <!-- Result from query: {{query_result}} -->
                </div>
             </form>
-
          </div>
       </div>
-
-
       <div class="">
          <div class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
             <h3>Query Results  <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Query Results" data-content="Below is query result."><i>i</i></button></h3>
             <div class="">
-
-
-              <!-- <table class="table table-hover">
-                 <thead>
-                    <tr>
-                       <th scope="col">1</th>
-                       <th scope="col">2</th>
-                       <th scope="col">3</th>
-                       <th scope="col">4</th>
-                       <th scope="col">5</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    {% for row in query_result %}
-                    <tr>
-                    {% for k,v in row.items() %}
-                      <td>{{v}}</td>
-                  </tr>
-                  {% endfor %}
-                  {% endfor %}
-               </tbody>
-            </table> -->
-
               <div id="query_tbl">
                </div>
             </div>
          </div>
       </div>
-
-
-
-
-
+      <div class="">
+         <div id="jumbo_download" class="jumbotron" style="overflow-x:scroll; overflow-y:scroll; white-space: nowrap;">
+            <h2>Download <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Download CSV" data-content="Click on the Download button to download the CSV file ready to import into the permanent database."><i>i</i></button></h2>
+            <form id="downloadcsv" name="form_download" enctype="multipart/form-data" method="get" action="/downloadcsv">
+               <div class="col">
+                  <a href="/downloadcsv/"><button id="btn_download"  type="submit" class="btn btn-lg btn-primary"  >Download</button></a>
+               </div>
+            </form>
+         </div>
+      </div>
    </div>
 </div>
 <footer class="footer">

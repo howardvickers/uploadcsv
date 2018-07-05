@@ -135,6 +135,8 @@
                         <li>view initial rows (equivalent to df.head() in pandas)</li>
                         <li>match columns with predefined field names</li>
                         <li>view same initial rows for only those columns matched to the predefined field names</li>
+                        <li>automatic adding of data to the database</li>
+                        <li>query the database to view all records with "db_state" = "NY"</li>
                         <li>download the data in the new format as a csv file</li>
                         <li>demo mode with preloaded csv file</li>
                      </ul>
@@ -159,28 +161,13 @@
                         <li>Flask</li>
                         <li>Jinja2</li>
                         <li>AWS (EC2, 53 Route)</li>
+                        <li>DynamoDB</li>
                         <li>Numpy</li>
                         <li>Pandas</li>
                      </ul>
                      Click on the GitHub logo below to explore the code.
                   </div>
                </div>
-            </div>
-            <div class="">
-              <div class="col-sm-6">
-                 <div id="jumbo_dynamodb" class="jumbotron" style="overflow-x:scroll; white-space: nowrap;">
-                    <h2>Create User <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" title="Create User" data-content="Click on the Create User button to use create a user."><i>i</i></button></h2>
-                    <div>
-                       <form action="/create_user">
-                          <div class="col">
-                             </br>
-                             <button type="submit" class="btn btn-lg btn-primary">Create User</button>
-                             {{age}}
-                          </div>
-                       </form>
-                    </div>
-                 </div>
-              </div>
             </div>
          </div>
       </div>

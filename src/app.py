@@ -12,7 +12,8 @@ from flask import send_file
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 
-dynamodb = boto3.resource('dynamodb')
+
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('users')
 
 
@@ -33,12 +34,6 @@ def query_from_db(k, v):
     FilterExpression=Attr(k).eq(v)
     )
     response_dict_lst = response['Items']
-    print('response_dict_lst:', response_dict_lst)
-    print('response_dict_lst[0]:', response_dict_lst[0])
-    print('response_dict_lst[0].items():', response_dict_lst[0].items())
-    # items = [('db_state', 'CA'), ('db_userid', 'a_18'), ('db_last', 'Inouye'), ('db_first', 'Veronika'), ('db_email', 'vinouye@aol.com')]
-    # [{'db_state': 'CA', 'db_userid': 'a_18', 'db_last': 'Inouye', 'db_first': 'Veronika', 'db_email': 'vinouye@aol.com'},
-
     top = '<table class="table table-hover"> <thead> <tr>'
     col = '<th scope="col">{}</th>'
     end_head = '</tr> </thead> <tbody>'
@@ -61,33 +56,7 @@ def query_from_db(k, v):
     return the_table
 
 
-    # for row in items:
-    #     rw.append(<tr>)
-    #     for k, v in row.items():
-    #         <td>v</td>
-
-
-    # print('items:', items)
-    # return items
-
-
-
 app = Flask(__name__)
-
-# @app.route('/create_user')
-# def create_user():
-#     print('create_user called')
-#     user="202"
-#     response = table.get_item(
-#     Key = {'userID':user}
-#     )
-#     age = response['Item']['Age']
-#     age_text = 'The age is {}'.format(age)
-#     table.put_item(Item={'userID':"303", 'Age':50, 'Height':180})
-#     return flask.render_template(
-#                                 'index.html',
-#                                 age = age
-#                                 )
 
 @app.route('/find_users', methods=["POST"])
 def find_users():
