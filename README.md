@@ -39,3 +39,6 @@ The web app offers the following functionality:
 * bootstrap
 * html
 * css
+* AWS (EC2 & Route 53)
+* DynamoDB
+* Boto3
