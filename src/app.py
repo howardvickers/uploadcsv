@@ -33,11 +33,14 @@ def query_from_db(k, v):
     FilterExpression=Attr('db_state').eq('CA')
     )
     response_dict_lst = response['Items']
+    print('response_dict_lst:', response_dict_lst)
+    print('response_dict_lst[0]:', response_dict_lst[0])
+    print('response_dict_lst[0].items():', response_dict_lst[0].items())
     # items = [('db_state', 'CA'), ('db_userid', 'a_18'), ('db_last', 'Inouye'), ('db_first', 'Veronika'), ('db_email', 'vinouye@aol.com')]
     # [{'db_state': 'CA', 'db_userid': 'a_18', 'db_last': 'Inouye', 'db_first': 'Veronika', 'db_email': 'vinouye@aol.com'},
 
     top = '<table class="table table-hover"> <thead> <tr>'
-    col = '<th scope="col">{}</th>'.format(k)
+    col = '<th scope="col">{}</th>'
     end_head = '</tr> </thead> <tbody>'
     row_begin = '<tr>'
     row = '<td>{}</td>'
