@@ -10,17 +10,18 @@ Note that the web app is intended as a conceptual project rather than a commerci
 The web app offers the following functionality:
 * upload csv files
 * view initial rows (equivalent to df.head() in pandas)
-* match columns with predefined field names
-* duplicate matches prevented with popup alert
-* insert new column with userID created by web app (option to add prefix to userID)
+* allows manual matching of columns with predefined field names
+* automatically estimates the correct matched fields
+* prevents duplicate matches with popup alert - both as selected and when clicking submit
+* inserts new column with userID created by web app (option to add prefix to userID)
 * view same initial rows for only those columns matched to the predefined field names
 * download the data in the new format as a csv file
 * demo mode with preloaded csv file
-* connect to a DynamoDB database on the backend
-* query the database with a predefined search
+* connects to a DynamoDB database on the backend
+* queries the database with a predefined search
 
 ### Future Functionality
-* improve robustness with checks
+* tbd
 
 ### Structure
 * [app.py](https://github.com/howardvickers/uploadcsv/blob/master/src/app.py) is the server.  
