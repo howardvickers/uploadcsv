@@ -120,17 +120,17 @@
                      </tr>
                   </thead>
                   <tbody>
-                     {% for col, example in cols_examples.items() %}
+                     {% for col, ex_select in cols_examples.items() %}
                      <tr>
                         <td>{{col}}</td>
-                        <td>{{example}}</td>
+                        <td>{{ex_select[0]}}</td>
                         <td>
-                           <select id="matchFields" type="button" name="{{col}}" class="btn btn-outline-secondary">
+                           <select id="matchFields" type="button" name="{{col}}" class="btn btn-outline-secondary {{ex_select[1][1]}}">
                               <option value="ignore">Match Field</option>
-                              <option value="db_first">First Name</option>
-                              <option value="db_last">Last Name</option>
-                              <option value="db_state">State</option>
-                              <option value="db_email">Email</option>
+                              <option value="db_first" {{ex_select[1][0][0]}}>First Name</option>
+                              <option value="db_last" {{ex_select[1][0][1]}}>Last Name</option>
+                              <option value="db_state" {{ex_select[1][0][2]}}>State</option>
+                              <option value="db_email" {{ex_select[1][0][3]}}>Email</option>
                            </select>
                         </td>
                      </tr>

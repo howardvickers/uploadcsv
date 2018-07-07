@@ -57,6 +57,14 @@
   padding-right: 40px;
   height: 150px;
 }
+
+
+#matchFields option:checked {
+    background: red;
+}
+
+
+
 @import url();
 
 

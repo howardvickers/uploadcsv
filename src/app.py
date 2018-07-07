@@ -11,7 +11,7 @@ import os
 from flask import send_file
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
-
+from match import guess_match as gm
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('users')
@@ -55,6 +55,14 @@ def query_from_db(k, v):
     print('the_table:', the_table)
     return the_table
 
+def which_fields_matched(df):
+    result_from_match_py = gm(df)
+    # result_from_match_py = {'db_email': 'e-mail', 'db_first': 'first_name', 'db_last': 'last_name', 'db_state': 'us_state'}
+    new_selected_lst = []
+    selected_lst = ['db_first', 'db_last', 'db_state', 'db_email']
+    for x in selected_lst:
+        new_selected_lst.append(result_from_match_py[x])
+    return new_selected_lst
 
 app = Flask(__name__)
 
@@ -87,7 +95,27 @@ def uploadcsv():
     initial_head = print_head(df)
     columns = list(df.columns)
     row_one = df.iloc[0]
+
+    matched_fields = which_fields_matched(df)
+    print('matched_fields', matched_fields)
+    # ex_and_match_select = [row_one, matched_fields]
     cols_examples = dict(zip(columns, row_one))
+    for k, v in cols_examples.items():
+        if k in matched_fields:
+            blanks = ['', '', '', '']
+            blanks[matched_fields.index(k)] = 'selected'
+            print('blanks:', blanks)
+            cols_examples[k] = v, [blanks, 'active']
+            blanks = ['', '', '', '']
+        else:
+            cols_examples[k] = v, [blanks, '']
+
+
+
+    # match_selected = which_selected()
+    # print('match_selected', match_selected)
+    # ex_and_match_select = [row_one, match_selected]
+    # cols_examples = dict(zip(columns, ex_and_match_select))
     print('cols_examples:', cols_examples)
     return flask.render_template(
                                 'upload.html',
@@ -106,7 +134,21 @@ def demo():
     initial_head = print_head(df)
     columns = list(df.columns)
     row_one = df.iloc[0]
+    matched_fields = which_fields_matched(df)
+    print('matched_fields', matched_fields)
+    # ex_and_match_select = [row_one, matched_fields]
     cols_examples = dict(zip(columns, row_one))
+    for k, v in cols_examples.items():
+        if k in matched_fields:
+            blanks = ['', '', '', '']
+            blanks[matched_fields.index(k)] = 'selected'
+            print('blanks:', blanks)
+            cols_examples[k] = v, [blanks, 'active']
+            blanks = ['', '', '', '']
+        else:
+            cols_examples[k] = v, [blanks, '']
+
+    # cols_examples = dict(zip(columns, row_one))
     print('cols_examples:', cols_examples)
     print('columns: ', columns)
     return flask.render_template(
